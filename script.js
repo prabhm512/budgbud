@@ -14,4 +14,35 @@ $(document).ready(() => {
             }
         }
     })
+
+    // Dynamically generate/delete rows for "Stats per Employee table"
+    $(".fa-plus").click(() => {
+        const newTableRow = `
+        <tr>
+            <th scope="row">X</th>
+            <td><input type="number" step="0.1" class="work-hours"></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>`;
+            
+        $(".emp-stats > tbody").append(newTableRow);
+    });
+
+    $(".fa-minus").click(() => {
+        const indexLastRow = $(".emp-stats > tbody").children().length - 1;
+
+        // Cannot delete 1st row as it is always required
+        if (indexLastRow === 0) {
+            return;
+        }
+
+        $(".emp-stats > tbody").children()[indexLastRow].remove();
+
+    })
+
+    // Automatically calcualate employee wise sales targets
 })
