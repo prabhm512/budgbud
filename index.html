@@ -12,165 +12,193 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 </head>
 <body>
-    <nav class="navbar navbar-light bg-light">
-        <div class="container-fluid">
-            <span class="navbar-brand mb-0 h1 align-middle">BudgBud</span>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <nav class="navbar navbar-light bg-light">
+                    <div class="container-fluid">
+                        <span class="navbar-brand mb-0 h1 align-middle">BudgBud</span>
+                    </div>
+                </nav>
+            </div>
         </div>
-    </nav>
     <br>
 
-    <!-- Store Stats -->
-    <table class="table store-stats">
-        <thead>
-            <tr>
-                <th scope="col"></th>
-                <th scope="col">Sales</th>
-                <th scope="col">WTD +/-</th>
-                <th scope="col">ATV</th>
-                <th scope="col">Connections</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <th scope="row">Budget</th>
-                <td><input type="number" class="day-budget">&nbsp;&nbsp;<button class="btn btn-primary calc-btn"><i class="fas fa-calculator"></i></button></td>
-                <td></td>
-                <td>@mdo</td>
-                <td>@mdo</td>
-            </tr>
-            <tr>
-                <th scope="row">Stretch</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-                <td>@mdo</td>
-            </tr>
-            <tr>
-                <th scope="row">Actual</th>
-                <td class="actual">Larry the Bird</td>
-                <td>Jacob</td>
-                <td class="actual">@twitter</td>
-                <td class="actual">@mdo</td>
-            </tr>
-        </tbody>
-    </table>
-    <br>
-    <!-- Required sales per hour -->
-    <table class="table operating-hours">
-        <thead>
-            <tr>
-                <th scope="col">Hours</th>
-                <th scope="col">
-                    <input type="number" class="open-time">
-                </th>
-                <th scope="col" id="hour-0"></th>
-                <th scope="col" id="hour-1"></th>
-                <th scope="col" id="hour-2"></th>
-                <th scope="col" id="hour-3"></th>
-                <th scope="col" id="hour-4"></th>
-                <th scope="col" id="hour-5"></th>
-                <th scope="col" id="hour-6"></th>
-                <th scope="col" id="hour-7"></th>
-                <th scope="col" id="hour-8"></th>
-                <th scope="col" id="hour-9"></th>
-                <th scope="col" id="hour-10"></th>
-                <th scope="col" id="hour-11"></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <th scope="row">Sales Target $</th>
-                <td></td>
-                <td></td>
-                <td>@mdo</td>
-                <td>@mdo</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <th scope="row">Sales Actual $</th>
-                <td></td>
-                <td></td>
-                <td>@mdo</td>
-                <td>@mdo</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <th scope="row">Connections</th>
-                <td></td>
-                <td></td>
-                <td>@mdo</td>
-                <td>@mdo</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-        </tbody>
-    </table>
-    <br>
-    <!-- Stats per employee -->
-    <table class="table emp-stats">
-        <thead>
-            <tr>
-                <th scope="col">Athlete</th>
-                <th scope="col">Hours</th>
-                <th scope="col" colspan="2">Sales</th>
-                <th scope="col" colspan="2">ATV</th>
-                <th scope="col" colspan="2">UPT</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr class="empstats-sub-heading">
-                <th scope="row"></th>
-                <td></td>
-                <td>T</td>
-                <td>A</td>
-                <td>T</td>
-                <td>A</td>
-                <td>T</td>
-                <td>A</td>
-            </tr>
-            <tr>
-                <th scope="row">X</th>
-                <td><input type="number" step="0.5" value="3" class="work-hours"></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-        </tbody>
-    </table>
-    <i class="fas fa-plus"></i>
-    &nbsp;
-    <i class="fas fa-minus"></i>
-    <br>
-    <h3 class="total-hours">Total Hours: 
-        &nbsp;<span class="total-hours-num"></span> 
-        <!-- &nbsp;&nbsp;&nbsp;&nbsp;<button class="btn btn-primary calc-btn">Calculate</button>  -->
-    </h3> 
+        <!-- Store Stats -->
+        <div class="row">
+            <div class="col-sm-8">
+                <table class="table store-stats">
+                    <thead>
+                        <tr>
+                            <th scope="col"></th>
+                            <th scope="col">Sales</th>
+                            <th scope="col">WTD +/-</th>
+                            <th scope="col">ATV</th>
+                            <th scope="col">Connections</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">Budget</th>
+                            <td><input type="number" class="day-budget">&nbsp;&nbsp;<button class="btn btn-primary calc-btn"><i class="fas fa-calculator"></i></button></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <div class="input-group mb-3">
+                                    Stretch &nbsp;
+                                    <span class="input-group-text stretch">%</span>
+                                    <input type="number" value="20" class="stretch-percent">
+                                </div>
+                            </th>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Actual</th>
+                            <td class="actual"></td>
+                            <td></td>
+                            <td class="actual"></td>
+                            <td class="actual"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <br>
+
+        <!-- Required sales per hour -->
+        <div class="row">
+            <div class="col-sm-12">
+                <table class="table operating-hours">
+                    <thead>
+                        <tr>
+                            <th scope="col">Hours</th>
+                            <th scope="col">
+                                <input type="number" class="open-time">
+                            </th>
+                            <th scope="col" id="hour-0"></th>
+                            <th scope="col" id="hour-1"></th>
+                            <th scope="col" id="hour-2"></th>
+                            <th scope="col" id="hour-3"></th>
+                            <th scope="col" id="hour-4"></th>
+                            <th scope="col" id="hour-5"></th>
+                            <th scope="col" id="hour-6"></th>
+                            <th scope="col" id="hour-7"></th>
+                            <th scope="col" id="hour-8"></th>
+                            <th scope="col" id="hour-9"></th>
+                            <th scope="col" id="hour-10"></th>
+                            <th scope="col" id="hour-11"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">Sales Target $</th>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Sales Actual $</th>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Connections</th>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <br>
+        
+        <!-- Stats per employee -->
+        <div class="row">
+            <div class="col-sm-12">
+                <table class="table emp-stats">
+                    <thead>
+                        <tr>
+                            <th scope="col">Athlete</th>
+                            <th scope="col">Hours</th>
+                            <th scope="col" colspan="2">Sales</th>
+                            <th scope="col" colspan="2">ATV</th>
+                            <th scope="col" colspan="2">UPT</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="empstats-sub-heading">
+                            <th scope="row"></th>
+                            <td></td>
+                            <td>T</td>
+                            <td>A</td>
+                            <td>T</td>
+                            <td>A</td>
+                            <td>T</td>
+                            <td>A</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">X</th>
+                            <td><input type="number" step="0.5" value="3" class="work-hours"></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <i class="fas fa-plus"></i>
+        &nbsp;
+        <i class="fas fa-minus"></i>
+        <br>
+        <h3 class="total-hours">Total Hours: 
+            &nbsp;<span class="total-hours-num"></span> 
+            <!-- &nbsp;&nbsp;&nbsp;&nbsp;<button class="btn btn-primary calc-btn">Calculate</button>  -->
+        </h3> 
    
     <!-- jQuery minified-->
     <script

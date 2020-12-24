@@ -58,7 +58,7 @@ $(document).ready(() => {
 
         $(".total-hours-num").html(totalHours);
 
-        const dayBudgetVal = $(".day-budget").val();
+        const dayBudgetVal = parseInt($(".day-budget").val());
         const requiredSalePerHour = dayBudgetVal/totalHours;
 
         // Calculate sales target for each employee
@@ -69,5 +69,8 @@ $(document).ready(() => {
 
             $(".emp-stats > tbody").children()[i].children[2].append(roundedSalesTarget);
         }
+        $(".store-stats > tbody").children()[1].children[1].innerHTML = "";
+        const stretchVal = dayBudgetVal + (($(".stretch-percent").val()/100) * dayBudgetVal);
+        $(".store-stats > tbody").children()[1].children[1].append(stretchVal);
     })
 })
