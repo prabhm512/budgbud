@@ -72,5 +72,35 @@ $(document).ready(() => {
         $(".store-stats > tbody").children()[1].children[1].innerHTML = "";
         const stretchVal = dayBudgetVal + (($(".stretch-percent").val()/100) * dayBudgetVal);
         $(".store-stats > tbody").children()[1].children[1].append(stretchVal);
+
+        // Calculate sales target & connections neeeded per hour
+        
+        // Clear all existing values in sales target row before adding new values
+        for (let i=1; i<=12; i++) {
+            $(".operating-hours > tbody").children()[0].children[i].innerHTML = "";
+            $("#con-target-"+i).html("");
+        }
+        const workingHours = $(".working-hours").val();
+    
+        const salesTarget = stretchVal / workingHours;
+
+        for (let i=1; i<=workingHours; i++) {
+            const hourlySalesTarget = Math.ceil(salesTarget * i);
+
+            $(".operating-hours > tbody").children()[0].children[i].innerHTML = hourlySalesTarget;
+    
+            const conTarget = Math.floor(hourlySalesTarget / $(".budget-atv").val());
+            $("#con-target-"+i).html(conTarget);
+        }
+        
+    })
+
+    // Calculate actual connections and mark if they are greater than target or not
+    $(".sales-actual").change(event => {
+        const actualSale = event.target.valueAsNumber;
+        const idx = event.target.id.substr(-1);
+        const conActual = Math.floor(actualSale / $(".budget-atv").val());
+
+        $("#con-actual-"+idx).html(conActual);
     })
 })

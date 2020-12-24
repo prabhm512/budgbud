@@ -38,3 +38,7 @@
 .stretch-percent,.stretch  { 
     height: 25px;
 }
+
+.operating-hours .sales-actual {
+    width: 70px;
+}
