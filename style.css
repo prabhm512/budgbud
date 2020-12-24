@@ -11,10 +11,12 @@
 }
 
 .operating-hours input {
+    border: 2px solid red;
     width: 40px;
 }
 
 .store-stats input {
+    border: 2px solid red;
     width: 80px;
 }
 
@@ -23,6 +25,7 @@
 }
 
 .emp-stats input {
+    border: 2px solid red;
     width: 50px;
 }
 
@@ -40,5 +43,6 @@
 }
 
 .operating-hours .sales-actual {
+    border: 2px solid orange;
     width: 70px;
 }

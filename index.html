@@ -40,7 +40,7 @@
                     <tbody>
                         <tr>
                             <th scope="row">Budget</th>
-                            <td><input type="number" class="day-budget">&nbsp;&nbsp;<button class="btn btn-primary calc-btn"><i class="fas fa-calculator"></i></button></td>
+                            <td><input type="number" class="day-budget"></td>
                             <td></td>
                             <td><input type="number" class="budget-atv"></td>
                             <td></td>
@@ -53,7 +53,7 @@
                                     <input type="number" value="20" class="stretch-percent">
                                 </div>
                             </th>
-                            <td></td>
+                            <td class="stretch-budget"></td>
                             <td></td>
                             <td><input type="number" class="stretch-atv"></td>
                             <td></td>
@@ -68,6 +68,11 @@
                     </tbody>
                 </table>
             </div>
+            <div class="col-sm-1"></div>
+            <div class="col-sm-3">
+                <h5>Fill/Update all RED boxes then CLICK the button below!</h5>
+                <button class="btn btn-primary calc-btn">Calculate <i class="fas fa-calculator"></i></button>
+            </div>
         </div>
 
         <br>
@@ -78,28 +83,26 @@
                 <table class="table operating-hours">
                     <thead>
                         <tr>
-                            <th scope="col">Working Hours <input type="number" class="working-hours"></th>
+                            <th scope="col">Working Hours <input type="number" class="working-hours" value="9"></th>
                             <th scope="col">
-                                <input type="number" class="open-time">
+                                <input type="number" class="open-time" value="10">
                             </th>
-                            <th scope="col" id="hour-0"></th>
-                            <th scope="col" id="hour-1"></th>
-                            <th scope="col" id="hour-2"></th>
-                            <th scope="col" id="hour-3"></th>
-                            <th scope="col" id="hour-4"></th>
-                            <th scope="col" id="hour-5"></th>
-                            <th scope="col" id="hour-6"></th>
-                            <th scope="col" id="hour-7"></th>
-                            <th scope="col" id="hour-8"></th>
-                            <th scope="col" id="hour-9"></th>
-                            <th scope="col" id="hour-10"></th>
-                            <th scope="col" id="hour-11"></th>
+                            <th scope="col" id="hour-0">11</th>
+                            <th scope="col" id="hour-1">12</th>
+                            <th scope="col" id="hour-2">1</th>
+                            <th scope="col" id="hour-3">2</th>
+                            <th scope="col" id="hour-4">3</th>
+                            <th scope="col" id="hour-5">4</th>
+                            <th scope="col" id="hour-6">5</th>
+                            <th scope="col" id="hour-7">6</th>
+                            <th scope="col" id="hour-8">7</th>
+                            <th scope="col" id="hour-9">8</th>
+                            <th scope="col" id="hour-10">9</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <th scope="row">Sales Target $</th>
-                            <td></td>
                             <td></td>
                             <td></td>
                             <td></td>
@@ -126,9 +129,7 @@
                             <td><input type="number" class="sales-actual" id="sales-actual-9"></td>
                             <td><input type="number" class="sales-actual" id="sales-actual-10"></td>
                             <td><input type="number" class="sales-actual" id="sales-actual-11"></td>
-                            <td><input type="number" class="sales-actual" id="sales-actual-12"></td>
-                            <td><input type="number" class="sales-actual" id="sales-actual-13"></td>
-                        </tr>
+                            <td><input type="number" class="sales-actual" id="sales-actual-12"></td>                        </tr>
                         <tr>
                             <th scope="row">Connections</th>
                             <td><span id="con-target-1"></span> / <span id="con-actual-1"></span></td>
@@ -143,7 +144,6 @@
                             <td><span id="con-target-10"></span> / <span id="con-actual-10"></span></td>
                             <td><span id="con-target-11"></span> / <span id="con-actual-11"></span></td>
                             <td><span id="con-target-12"></span> / <span id="con-actual-12"></span></td>
-                            <td><span id="con-target-13"></span> / <span id="con-actual-13"></span></td>
                         </tr>
                     </tbody>
                 </table>
@@ -158,7 +158,7 @@
                 <table class="table emp-stats">
                     <thead>
                         <tr>
-                            <th scope="col">Athlete</th>
+                            <!-- <th scope="col">Athlete</th> -->
                             <th scope="col">Hours</th>
                             <th scope="col" colspan="2">Sales</th>
                             <th scope="col" colspan="2">ATV</th>
@@ -168,7 +168,7 @@
                     <tbody>
                         <tr class="empstats-sub-heading">
                             <th scope="row"></th>
-                            <td></td>
+                            <!-- <td></td> -->
                             <td>T</td>
                             <td>A</td>
                             <td>T</td>
@@ -177,7 +177,7 @@
                             <td>A</td>
                         </tr>
                         <tr>
-                            <th scope="row">X</th>
+                            <!-- <th scope="row">X</th> -->
                             <td><input type="number" step="0.5" value="3" class="work-hours"></td>
                             <td></td>
                             <td></td>
