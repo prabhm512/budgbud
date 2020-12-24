@@ -1,11 +1,27 @@
-h1 {
-    text-align: center;
+.actual {
+    border-top: 2px solid black;
 }
 
-.budget {
-    margin-top: 25px;
+.table td {
+    border-right: 1px solid black;
 }
 
-.budget button {
-    color: white;
+.table th {
+    border-right: 1px solid black;
+}
+
+.operating-hours input {
+    width: 40px;
+}
+
+.store-stats input {
+    width: 80px;
+}
+
+.empstats-sub-heading td {
+    font-size: 10px;
+}
+
+.emp-stats input {
+    width: 40px;
 }
