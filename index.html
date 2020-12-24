@@ -33,7 +33,7 @@
         <tbody>
             <tr>
                 <th scope="row">Budget</th>
-                <td><input type="number" class="day-budget"></td>
+                <td><input type="number" class="day-budget">&nbsp;&nbsp;<button class="btn btn-primary calc-btn"><i class="fas fa-calculator"></i></button></td>
                 <td></td>
                 <td>@mdo</td>
                 <td>@mdo</td>
@@ -153,7 +153,7 @@
             </tr>
             <tr>
                 <th scope="row">X</th>
-                <td><input type="number" step="0.1" class="work-hours"></td>
+                <td><input type="number" step="0.5" value="3" class="work-hours"></td>
                 <td></td>
                 <td></td>
                 <td></td>
@@ -167,8 +167,11 @@
     &nbsp;
     <i class="fas fa-minus"></i>
     <br>
-    <h3>Total Hours: <span class="total-hours"></span></h3> 
-
+    <h3 class="total-hours">Total Hours: 
+        &nbsp;<span class="total-hours-num"></span> 
+        <!-- &nbsp;&nbsp;&nbsp;&nbsp;<button class="btn btn-primary calc-btn">Calculate</button>  -->
+    </h3> 
+   
     <!-- jQuery minified-->
     <script
         src="http://code.jquery.com/jquery-3.5.1.min.js"

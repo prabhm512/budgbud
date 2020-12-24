@@ -25,3 +25,12 @@
 .emp-stats input {
     width: 50px;
 }
+
+.total-hours {
+    float: right;
+}
+
+.total-hours-num {
+    border: 1px solid black;
+    padding: 5px;
+}

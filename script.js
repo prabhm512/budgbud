@@ -20,7 +20,7 @@ $(document).ready(() => {
         const newTableRow = `
         <tr>
             <th scope="row">X</th>
-            <td><input type="number" step="0.1" class="work-hours"></td>
+            <td><input type="number" step="0.5" value="3" class="work-hours"></td>
             <td></td>
             <td></td>
             <td></td>
@@ -33,6 +33,7 @@ $(document).ready(() => {
     });
 
     $(".fa-minus").click(() => {
+        
         const indexLastRow = $(".emp-stats > tbody").children().length - 1;
 
         // Cannot delete 1st row as it is always required
@@ -44,5 +45,29 @@ $(document).ready(() => {
 
     })
 
-    // Automatically calcualate employee wise sales targets
+    // Automatically calcualate employee sales targets
+    $(".calc-btn").click(() => {
+        let totalHours=0;
+
+        const totalEmpStatsRows = $(".emp-stats > tbody").children().length;
+
+        // Calculate total hours
+        for (let i=1; i<totalEmpStatsRows; i++) {
+            totalHours+=$(".emp-stats > tbody").children()[i].children[1].children[0].valueAsNumber;
+        }
+
+        $(".total-hours-num").html(totalHours);
+
+        const dayBudgetVal = $(".day-budget").val();
+        const requiredSalePerHour = dayBudgetVal/totalHours;
+
+        // Calculate sales target for each employee
+        for (let i=1; i<totalEmpStatsRows; i++) {
+            $(".emp-stats > tbody").children()[i].children[2].innerHTML = "";
+            const salesTarget = $(".emp-stats > tbody").children()[i].children[1].children[0].valueAsNumber * requiredSalePerHour;
+            const roundedSalesTarget = Math.ceil(salesTarget);
+
+            $(".emp-stats > tbody").children()[i].children[2].append(roundedSalesTarget);
+        }
+    })
 })
