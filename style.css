@@ -30,11 +30,31 @@
 
 .emp-stats input {
     border: 2px solid red;
+    width: 70px;
+}
+
+.emp-stats input[class="work-hours"] {
     width: 50px;
 }
 
-.total-hours {
+.calculate {
     float: right;
+}
+
+.hours {
+    margin-bottom: 25px;
+}
+
+.fa-plus {
+    font-size: 20px;
+    color: blue;
+    cursor: pointer;
+}
+
+.fa-minus {
+    font-size: 20px;
+    color: grey;
+    cursor: pointer;
 }
 
 .total-hours-num {
@@ -51,11 +71,7 @@
     width: 70px;
 }
 
-.emp-stats input[class="emp-target-atv"] {
-    border: 2px solid red;
-}
-
-.emp-stats input[class="emp-target-upt"] {
+.emp-stats input[class*="emp-target-"] {
     border: 1px solid black;
 }
 .emp-stats input[class*="emp-actual-"] {

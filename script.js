@@ -154,10 +154,10 @@ $(document).ready(() => {
 
         // Calculate actual sales for the day
         let totalActualSales=0;
-        let cntSales=0;
 
         for (let i=1; i<totalEmpStatsRows; i++) {
             const actualSales = $(".emp-stats > tbody").children()[i].children[2].children[0].valueAsNumber;
+
             if (isNaN(actualSales)) {
                 continue;
             }
@@ -177,7 +177,7 @@ $(document).ready(() => {
         } else {
             idx = event.target.id.substr(-2);
         }
-        const conActual = Math.floor(actualSale / $(".budget-atv").val());
+        const conActual = Math.floor(actualSale / $(".stretch-atv").val());
 
         $("#con-actual-"+idx).html(conActual);
 
