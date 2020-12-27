@@ -20,6 +20,10 @@
     width: 80px;
 }
 
+.store-stats .budget-atv {
+    border: 1px solid black;
+}
+
 .empstats-sub-heading td {
     font-size: 10px;
 }
@@ -47,10 +51,14 @@
     width: 70px;
 }
 
-.emp-stats input[class*="emp-target-"] {
+.emp-stats input[class="emp-target-atv"] {
     border: 2px solid red;
 }
 
+.emp-stats input[class="emp-target-upt"] {
+    border: 1px solid black;
+}
 .emp-stats input[class*="emp-actual-"] {
     border: 2px solid orange;
 }
+

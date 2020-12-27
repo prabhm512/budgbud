@@ -65,12 +65,19 @@ $(document).ready(() => {
 
         // Calculate average atv required to meet budget from emp individual atv's
         let totalATV=0;
+        // Count number of rows that don't have a target ATV
+        let cntRowATV = 0;
     
         for (let i=1; i<totalEmpStatsRows; i++) {
-            const targetATV = $(".emp-stats > tbody").children()[i].children[3].children[0].valueAsNumber;
-            totalATV+=targetATV;
+            const empTargetATV = $(".emp-stats > tbody").children()[i].children[3].children[0].valueAsNumber;
+            if (empTargetATV === 0 || isNaN(empTargetATV)) {
+                cntRowATV+=1;
+                continue;
+            }
+            totalATV+=empTargetATV;
         }
-        const averageATV = totalATV/(totalEmpStatsRows-1);
+
+        const averageATV = Math.ceil(totalATV/(totalEmpStatsRows-(1+cntRowATV)));
         $(".budget-atv").val(averageATV);
 
         // Calculate sales target for each employee
@@ -101,7 +108,7 @@ $(document).ready(() => {
 
             $(".operating-hours > tbody").children()[0].children[i].innerHTML = hourlySalesTarget;
     
-            const conTarget = Math.floor(hourlySalesTarget / $(".budget-atv").val());
+            const conTarget = Math.ceil(hourlySalesTarget / $(".stretch-atv").val());
             $("#con-target-"+i).html(conTarget);
         }
 
@@ -117,29 +124,43 @@ $(document).ready(() => {
 
         // Calculate actual atv for the day
         let totalActualATV=0;
+        let cntActualATV = 0;
         
         for (let i=1; i<totalEmpStatsRows; i++) {
             const actualATV = $(".emp-stats > tbody").children()[i].children[4].children[0].valueAsNumber;
+            if (actualATV === 0 || isNaN(actualATV)) {
+                cntActualATV+=1;
+                continue;
+            }
             totalActualATV+=actualATV;
         }
-        const finalATV = Math.round(totalActualATV/(totalEmpStatsRows-1));
+        const finalATV = Math.round(totalActualATV/(totalEmpStatsRows-(1+cntActualATV)));
         $(".final-atv").html(finalATV);
 
         // Calculate actual UPT for the day
         let totalActualUPT=0;
+        let cntActualUPT=0;
         
         for (let i=1; i<totalEmpStatsRows; i++) {
             const actualUPT = $(".emp-stats > tbody").children()[i].children[6].children[0].valueAsNumber;
+            if (actualUPT === 0 || isNaN(actualUPT)) {
+                cntActualUPT+=1;
+                continue;
+            }
             totalActualUPT+=actualUPT;
         }
-        const finalUPT = totalActualUPT/(totalEmpStatsRows-1);
+        const finalUPT = totalActualUPT/(totalEmpStatsRows-(1+cntActualUPT));
         $(".final-upt").html(finalUPT.toFixed(2));
 
         // Calculate actual sales for the day
         let totalActualSales=0;
+        let cntSales=0;
 
         for (let i=1; i<totalEmpStatsRows; i++) {
             const actualSales = $(".emp-stats > tbody").children()[i].children[2].children[0].valueAsNumber;
+            if (isNaN(actualSales)) {
+                continue;
+            }
             totalActualSales+=actualSales;
         }
         $(".final-sales").html(totalActualSales);
@@ -150,7 +171,12 @@ $(document).ready(() => {
     // Calculate actual connections and mark if they are greater than target or not
     $(".sales-actual").change(event => {
         const actualSale = event.target.valueAsNumber;
-        const idx = event.target.id.substr(-1);
+        let idx = 0;
+        if (/-[0-9]/.test(event.target.id.substr(-2))) {
+            idx = event.target.id.substr(-1);
+        } else {
+            idx = event.target.id.substr(-2);
+        }
         const conActual = Math.floor(actualSale / $(".budget-atv").val());
 
         $("#con-actual-"+idx).html(conActual);
