@@ -21,15 +21,15 @@ $(document).ready(() => {
     $(".fa-plus").click(() => {
     // <th scope="row">X</th>
         const newTableRow = `
-        <tr>
-            <td><input type="number" step="0.5" value="3" class="work-hours"></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>`;
+            <tr>
+                <td><input type="number" step="0.5" value="3" class="work-hours"></td>
+                <td></td>
+                <td><input type="number" step="1" class="emp-actual-sales" value="0"></td>
+                <td><input type="number" step="1" class="emp-target-atv" value="0"></td>
+                <td><input type="number" step="1" class="emp-actual-atv" value="0"></td>
+                <td><input type="number" step="0.01" class="emp-target-upt" value="0"></td>
+                <td><input type="number" step="0.01" class="emp-actual-upt" value="0"></td>
+            </tr>`;
             
         $(".emp-stats > tbody").append(newTableRow);
     });
@@ -63,9 +63,19 @@ $(document).ready(() => {
         const dayBudgetVal = parseInt($(".day-budget").val());
         const requiredSalePerHour = dayBudgetVal/totalHours;
 
+        // Calculate average atv required to meet budget from emp individual atv's
+        let totalATV=0;
+    
+        for (let i=1; i<totalEmpStatsRows; i++) {
+            const targetATV = $(".emp-stats > tbody").children()[i].children[3].children[0].valueAsNumber;
+            totalATV+=targetATV;
+        }
+        const averageATV = totalATV/(totalEmpStatsRows-1);
+        $(".budget-atv").val(averageATV);
+
         // Calculate sales target for each employee
         for (let i=1; i<totalEmpStatsRows; i++) {
-            $(".emp-stats > tbody").children()[i].children[2].innerHTML = "";
+            $(".emp-stats > tbody").children()[i].children[1].innerHTML = "";
             const salesTarget = $(".emp-stats > tbody").children()[i].children[0].children[0].valueAsNumber * requiredSalePerHour;
             const roundedSalesTarget = Math.ceil(salesTarget);
 
@@ -104,6 +114,37 @@ $(document).ready(() => {
         // Connections required to meet stretch
         const stretchCon = Math.round($(".stretch-budget").html() / $(".stretch-atv").val());
         $(".store-stats > tbody").children()[1].children[4].innerHTML = `x ` + stretchCon;
+
+        // Calculate actual atv for the day
+        let totalActualATV=0;
+        
+        for (let i=1; i<totalEmpStatsRows; i++) {
+            const actualATV = $(".emp-stats > tbody").children()[i].children[4].children[0].valueAsNumber;
+            totalActualATV+=actualATV;
+        }
+        const finalATV = Math.round(totalActualATV/(totalEmpStatsRows-1));
+        $(".final-atv").html(finalATV);
+
+        // Calculate actual UPT for the day
+        let totalActualUPT=0;
+        
+        for (let i=1; i<totalEmpStatsRows; i++) {
+            const actualUPT = $(".emp-stats > tbody").children()[i].children[6].children[0].valueAsNumber;
+            totalActualUPT+=actualUPT;
+        }
+        const finalUPT = totalActualUPT/(totalEmpStatsRows-1);
+        $(".final-upt").html(finalUPT.toFixed(2));
+
+        // Calculate actual sales for the day
+        let totalActualSales=0;
+
+        for (let i=1; i<totalEmpStatsRows; i++) {
+            const actualSales = $(".emp-stats > tbody").children()[i].children[2].children[0].valueAsNumber;
+            totalActualSales+=actualSales;
+        }
+        $(".final-sales").html(totalActualSales);
+
+        $(".final-connections").html(Math.round(totalActualSales/finalATV));
     })
 
     // Calculate actual connections and mark if they are greater than target or not
@@ -126,6 +167,7 @@ $(document).ready(() => {
             $("#con-actual-"+idx).css("color", "black");
         }
     })
+
 
     // Connection numbers will change if work hours are changed
     // Need to update css in this case too

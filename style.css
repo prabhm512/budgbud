@@ -46,3 +46,11 @@
     border: 2px solid orange;
     width: 70px;
 }
+
+.emp-stats input[class*="emp-target-"] {
+    border: 2px solid red;
+}
+
+.emp-stats input[class*="emp-actual-"] {
+    border: 2px solid orange;
+}
