@@ -1,3 +1,8 @@
+.navbar-brand.mb-0 {
+    margin: auto;
+    color: black;
+    font-size: 30px;
+}
 .actual {
     border-top: 2px solid black;
 }
@@ -39,6 +44,7 @@
 
 .calculate {
     float: right;
+    margin-bottom: 40px;
 }
 
 .hours {
