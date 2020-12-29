@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BudgBud</title>
+    <!-- Favicon -->
+    <link rel="icon" href="assets/calculator.jpg">
     <!-- CSS -->
     <link rel="stylesheet" type="text/css" href="./style.css">
     <!-- Bootstrap (CSS only) -->
@@ -47,7 +49,7 @@
                             <td><input type="number" class="day-budget"></td>
                             <td></td>
                             <td><input type="number" class="budget-atv" disabled></td>
-                            <td></td>
+                            <td class="budget-con"></td>
                         </tr>
                         <tr>
                             <th scope="row">
@@ -79,24 +81,26 @@
         <!-- Required sales per hour -->
         <div class="row">
             <div class="col-sm-12">
+                <div class="wrap-opening-hours">
+                    <span><b>Store Open:</b> <input type="number" class="store-open" value="9"></span><span> <b>Close:</b> <input type="number" class="store-close" value="6"></span>
+                </div>
                 <table class="table operating-hours">
                     <thead>
                         <tr>
-                            <th scope="col">Working Hours <input type="number" class="working-hours" value="9"></th>
-                            <th scope="col">
-                                <input type="number" class="open-time" value="10">
-                            </th>
-                            <th scope="col" id="hour-0">11</th>
-                            <th scope="col" id="hour-1">12</th>
-                            <th scope="col" id="hour-2">1</th>
-                            <th scope="col" id="hour-3">2</th>
-                            <th scope="col" id="hour-4">3</th>
-                            <th scope="col" id="hour-5">4</th>
-                            <th scope="col" id="hour-6">5</th>
-                            <th scope="col" id="hour-7">6</th>
-                            <th scope="col" id="hour-8">7</th>
-                            <th scope="col" id="hour-9">8</th>
-                            <th scope="col" id="hour-10">9</th>
+                            <td scope="col"><i>Hours</i></td>
+                            <th scope="col" id="hour-0">10</th>
+                            <th scope="col" id="hour-1">11</th>
+                            <th scope="col" id="hour-2">12</th>
+                            <th scope="col" id="hour-3">1</th>
+                            <th scope="col" id="hour-4">2</th>
+                            <th scope="col" id="hour-5">3</th>
+                            <th scope="col" id="hour-6">4</th>
+                            <th scope="col" id="hour-7">5</th>
+                            <th scope="col" id="hour-8">6</th>
+                            <th scope="col" id="hour-9">7</th>
+                            <th scope="col" id="hour-10">8</th>
+                            <th scope="col" id="hour-11">9</th>
+                            <th scope="col" id="hour-12">10</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -114,8 +118,9 @@
                             <td></td>
                             <td></td>
                             <td></td>
+                            <td></td>
                         </tr>
-                        <tr>
+                        <!-- <tr>
                             <th scope="row">Sales Actual $</th>
                             <td><input type="number" class="sales-actual" id="sales-actual-1"></td>
                             <td><input type="number" class="sales-actual" id="sales-actual-2"></td>
@@ -128,21 +133,24 @@
                             <td><input type="number" class="sales-actual" id="sales-actual-9"></td>
                             <td><input type="number" class="sales-actual" id="sales-actual-10"></td>
                             <td><input type="number" class="sales-actual" id="sales-actual-11"></td>
-                            <td><input type="number" class="sales-actual" id="sales-actual-12"></td>                        </tr>
+                            <td><input type="number" class="sales-actual" id="sales-actual-12"></td>                        
+                        </tr> -->
                         <tr>
                             <th scope="row">Connections</th>
-                            <td><span id="con-target-1"></span> / <span id="con-actual-1"></span></td>
-                            <td><span id="con-target-2"></span> / <span id="con-actual-2"></span></td>
-                            <td><span id="con-target-3"></span> / <span id="con-actual-3"></span></td>
-                            <td><span id="con-target-4"></span> / <span id="con-actual-4"></span></td>
-                            <td><span id="con-target-5"></span> / <span id="con-actual-5"></span></td>
-                            <td><span id="con-target-6"></span> / <span id="con-actual-6"></span></td>
-                            <td><span id="con-target-7"></span> / <span id="con-actual-7"></span></td>
-                            <td><span id="con-target-8"></span> / <span id="con-actual-8"></span></td>
-                            <td><span id="con-target-9"></span> / <span id="con-actual-9"></span></td>
-                            <td><span id="con-target-10"></span> / <span id="con-actual-10"></span></td>
-                            <td><span id="con-target-11"></span> / <span id="con-actual-11"></span></td>
-                            <td><span id="con-target-12"></span> / <span id="con-actual-12"></span></td>
+                            <!-- / <span id="con-actual-1"></span> -->
+                            <td><span id="con-target-1"></span></td>
+                            <td><span id="con-target-2"></span></td>
+                            <td><span id="con-target-3"></span></td>
+                            <td><span id="con-target-4"></span></td>
+                            <td><span id="con-target-5"></span></td>
+                            <td><span id="con-target-6"></span></td>
+                            <td><span id="con-target-7"></span></td>
+                            <td><span id="con-target-8"></span></td>
+                            <td><span id="con-target-9"></span></td>
+                            <td><span id="con-target-10"></span></td>
+                            <td><span id="con-target-11"></span></td>
+                            <td><span id="con-target-12"></span></td>
+                            <td><span id="con-target-13"></span></td>
                         </tr>
                     </tbody>
                 </table>
@@ -158,7 +166,7 @@
                     <thead>
                         <tr>
                             <!-- <th scope="col">Athlete</th> -->
-                            <th scope="col">Hours</th>
+                            <td scope="col">Hours</td>
                             <th scope="col" colspan="2">Sales</th>
                             <th scope="col" colspan="2">ATV</th>
                             <th scope="col" colspan="2">UPT</th>
@@ -206,7 +214,10 @@
         integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
         crossorigin="anonymous">
     </script>
-
+    <!-- Day.js -->
+    <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
+    <script>dayjs().format()</script>
+    
     <script src="./script.js"></script>
 </body>
 </html>

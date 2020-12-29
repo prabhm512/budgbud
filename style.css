@@ -29,6 +29,15 @@
     border: 1px solid black;
 }
 
+input[class*="store-"] {
+    width: 50px;
+    border: 2px solid red;
+}
+
+.wrap-opening-hours {
+    margin-bottom: 20px;
+}
+
 .empstats-sub-heading td {
     font-size: 10px;
 }
@@ -53,7 +62,8 @@
 
 .fa-plus {
     font-size: 20px;
-    color: blue;
+    color: red;
+    margin-right: 10px;
     cursor: pointer;
 }
 

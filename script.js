@@ -11,9 +11,17 @@ $(document).ready(() => {
             dailyFigures = storedDailyFigures;
             renderDailyFigures();
         }
+
+        // Clear the numbers on screen at 4am every day
+        if (dayjs().get('hour') === 4) {
+            localStorage.clear();
+        }
         
     }
     init();
+
+    // Reload loaction so that it screen clears around 4:30am
+    setTimeout(() => location.reload(), 1800000);
 
     function renderDailyFigures() {
         // Day budget
@@ -28,11 +36,24 @@ $(document).ready(() => {
         // Total hours employees are working in the day
         $(".total-hours-num").html(dailyFigures[1].totalHours);
 
+        // Store hours store is open
+        for (let i=0; i<dailyFigures[8].length; i++) {
+            $("#hour-"+i).html(dailyFigures[8][i].hour);
+            console.log($("#hour-"+i).html(dailyFigures[8][i].hour));
+        }
+
+        // Store open time
+        $(".store-open").val(dailyFigures[1].storeOpen);
+        // Store close time
+        $(".store-close").val(dailyFigures[1].storeClose);
+
         // Average ATV based on employee target ATV's for the day
         $(".budget-atv").val(dailyFigures[1].averageATV);
 
         // Stretch Value
-        $(".store-stats > tbody").children()[1].children[1].append(dailyFigures[1].stretchVal);
+        if (dailyFigures[1].dayBudget !== null) {
+            $(".store-stats > tbody").children()[1].children[1].append(dailyFigures[1].stretchVal);
+        }
 
         // Hourly sales target & connections
         for ( let i=0; i<dailyFigures[1].workingHours; i++) {
@@ -65,8 +86,15 @@ $(document).ready(() => {
         }
 
         // Connections required in the day (budget & stretch)
-        $(".store-stats > tbody").children()[0].children[4].innerHTML = `x `+dailyFigures[1].budgetCon;
-        $(".store-stats > tbody").children()[1].children[4].innerHTML = `x `+dailyFigures[1].stretchCon;
+        if (dailyFigures[1].finalATV !== null) {
+            $(".store-stats > tbody").children()[0].children[4].innerHTML = `x ${dailyFigures[1].budgetCon}`;
+            // Final ATV
+            $(".final-atv").html(dailyFigures[1].finalATV);
+        }
+
+        if (dailyFigures[1].stretchATV !== null) {
+            $(".store-stats > tbody").children()[1].children[4].innerHTML = `x ${dailyFigures[1].stretchCon}`;
+        }
 
         // Target& Actual Emp Sales, ATV's & UPT's
         for (let i=0; i<dailyFigures[5].length; i++) {
@@ -83,34 +111,42 @@ $(document).ready(() => {
             $(".emp-stats > tbody").children()[i+1].children[6].children[0].value = dailyFigures[4][i];
         }
 
-        // Final ATV
-        $(".final-atv").html(dailyFigures[1].finalATV);
-
-        // Final UPT
-        $(".final-upt").html(dailyFigures[1].finalUPT);
+        if (isNaN(dailyFigures[1].finalUPT) === false) {
+            // Final UPT
+            $(".final-upt").html(dailyFigures[1].finalUPT);
+        }
 
         // Final Sales
         $(".final-sales").html(dailyFigures[1].finalSales);
 
-        // Final Connections
-        $(".final-connections").html("x" + "" + dailyFigures[1].finalCons);
-    }
-    // Automatically fill in store hours after open time is entered
-    $(".open-time").change(() => {
-
-        const openTime = $(".open-time").val();
-
-        for (let i=0; i<12; i++) {
-            $("#hour-"+i).html("");
-
-            const autoTime = parseInt(openTime)+i+1;
-            if (autoTime<=12) {
-                $("#hour-"+i).html(autoTime);
-            } else {
-                $("#hour-"+i).html(autoTime-12);
-            }
+        if (dailyFigures[1].finalCons !== null) {
+            // Final Connections
+            $(".final-connections").html(`x ${dailyFigures[1].finalCons}`);
         }
-    })
+    }
+
+    // function openTimeChange() {
+    //     const openTime = $(".open-time").html();
+    //     const openingHours = [];
+
+    //     for (let i=0; i<=13; i++) {
+    //         $("#hour-"+i).html("");
+
+    //         const autoTime = parseInt(openTime)+i+1;
+    //         if (autoTime<=12) {
+    //             $("#hour-"+i).html(autoTime);
+    //         } else {
+    //             $("#hour-"+i).html(autoTime-12);
+    //         }
+    //         openingHours.push(
+    //             {
+    //                 hour: $("#hour-"+i).html()
+    //             }
+    //         )
+    //     }
+    //     dailyFigures.push([...openingHours]);
+    //     storeDailyFigures();
+    // }
 
     // Dynamically generate/delete rows for "Stats per Employee table"
     $(".fa-plus").click(() => {
@@ -144,10 +180,31 @@ $(document).ready(() => {
 
     // Automatically calcualate employee sales targets
     $(".calc-btn").click(() => {
+
         // Clear daily figures array when this button is clicked
         for (let i=0; i<dailyFigures.length; i++) {
             dailyFigures.splice(i);
         }
+
+        // Automatically fill each hour store is open into operating-hours
+        const openTime = $(".store-open").val();
+        const openingHours = [];;
+
+        for (let i=0; i<=12; i++) {
+            $("#hour-"+i).html("");
+
+            const autoTime = parseInt(openTime)+i+1;
+            if (autoTime<=12) {
+                $("#hour-"+i).html(autoTime);
+            } else {
+                $("#hour-"+i).html(autoTime-12);
+            }
+            openingHours.push(
+                {
+                    hour: $("#hour-"+i).html()
+                }
+            )
+        };
 
         let totalHours=0;
 
@@ -212,11 +269,14 @@ $(document).ready(() => {
         // Calculate sales target & connections neeeded per hour
         
         // Clear all existing values in sales target row before adding new values
-        for (let i=1; i<=12; i++) {
+        for (let i=1; i<=13; i++) {
             $(".operating-hours > tbody").children()[0].children[i].innerHTML = "";
             $("#con-target-"+i).html("");
         }
-        const workingHours = $(".working-hours").val();
+
+        const storeOpen = parseInt($(".store-open").val());
+        const storeClose = parseInt($(".store-close").val());
+        const workingHours = (12 + storeClose) - storeOpen;
     
         const salesTarget = stretchVal / workingHours;
 
@@ -329,13 +389,13 @@ $(document).ready(() => {
                 averageATV: averageATV,
                 dayBudget: dayBudgetVal,
                 totalHours: totalHours,
-                workingHours: parseInt(workingHours)
+                workingHours: parseInt(workingHours),
+                storeOpen: storeOpen,
+                storeClose: storeClose
             }
         );        
         
-        dailyFigures.push([...storeHourlyStats], [...storeActualATV], [...storeActualUPT], [...storeActualSales], [...storeTargetATV], [...storeTargetUPT]);
-
-        console.log(dailyFigures);
+        dailyFigures.push([...storeHourlyStats], [...storeActualATV], [...storeActualUPT], [...storeActualSales], [...storeTargetATV], [...storeTargetUPT], [...openingHours]);
 
         storeDailyFigures();
         // renderDailyFigures();
@@ -343,51 +403,31 @@ $(document).ready(() => {
     });
 
     // Calculate actual connections and mark if they are greater than target or not
-    $(".sales-actual").change(event => {
-        const actualSale = event.target.valueAsNumber;
-        let idx = 0;
-        if (/-[0-9]/.test(event.target.id.substr(-2))) {
-            idx = event.target.id.substr(-1);
-        } else {
-            idx = event.target.id.substr(-2);
-        }
-        const conActual = Math.floor(actualSale / $(".stretch-atv").val());
+    // $(".sales-actual").change(event => {
+    //     const actualSale = event.target.valueAsNumber;
+    //     let idx = 0;
+    //     if (/-[0-9]/.test(event.target.id.substr(-2))) {
+    //         idx = event.target.id.substr(-1);
+    //     } else {
+    //         idx = event.target.id.substr(-2);
+    //     }
+    //     const conActual = Math.floor(actualSale / $(".stretch-atv").val());
 
-        $("#con-actual-"+idx).html(conActual);
+    //     $("#con-actual-"+idx).html(conActual);
 
-        const targetValue = parseInt($("#con-target-"+idx).html());
-        // Add green mark if actual hourly connections equal or are above target
-        if (conActual >= targetValue) {
-            $("#con-actual-"+idx).css("background-color", "green");
-            $("#con-actual-"+idx).css("color", "white");
-            $("#con-actual-"+idx).css("padding-left", "5px");
-            $("#con-actual-"+idx).css("padding-right", "5px");
-        } else {
-            $("#con-actual-"+idx).css("background-color", "white");
-            $("#con-actual-"+idx).css("color", "black");
-        }
-    })
-
-
-    // Connection numbers will change if work hours are changed
-    // Need to update css in this case too
-    
-    // $(".working-hours").change(() => {
-    //     for (let i=1; i<=12; i++) {
-    //         const targetVal = parseInt($("#con-target-"+i).html());
-    //         const actualVal = parseInt($("#con-actual-"+i).html());
-    //         // Add green mark if actual hourly connections equal or are above target
-    //         if (actualVal >= targetVal) {
-    //             $("#con-actual-"+i).css("background-color", "green");
-    //             $("#con-actual-"+i).css("color", "white");
-    //             $("#con-actual-"+i).css("padding-left", "5px");
-    //             $("#con-actual-"+i).css("padding-right", "5px");
-    //         } else {
-    //             $("#con-actual-"+i).css("background-color", "white");
-    //             $("#con-actual-"+i).css("color", "black");
-    //         }
+    //     const targetValue = parseInt($("#con-target-"+idx).html());
+    //     // Add green mark if actual hourly connections equal or are above target
+    //     if (conActual >= targetValue) {
+    //         $("#con-actual-"+idx).css("background-color", "green");
+    //         $("#con-actual-"+idx).css("color", "white");
+    //         $("#con-actual-"+idx).css("padding-left", "5px");
+    //         $("#con-actual-"+idx).css("padding-right", "5px");
+    //     } else {
+    //         $("#con-actual-"+idx).css("background-color", "white");
+    //         $("#con-actual-"+idx).css("color", "black");
     //     }
     // })
+
 
     function storeDailyFigures() {
         localStorage.setItem("dailyFigures", JSON.stringify(dailyFigures));
